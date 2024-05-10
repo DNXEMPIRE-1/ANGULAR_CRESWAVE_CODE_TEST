@@ -1,0 +1,39 @@
+.nav-items {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  height: 56px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  z-index: 10;
+}
+
+.side {
+  margin-top: 1rem;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  overflow-x: hidden;
+  max-width: 200px;
+
+  .nav-item {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.label {
+  white-space: nowrap;
+}
+
+.nav-item {
+  transition: all 0.15s ease-in-out;
+  border-radius: 4px;
+  width: 100%;
+  z-index: 10;
+
+  &:hover {
+    background: var(--primary-darker);
+  }
+}
