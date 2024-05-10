@@ -1,0 +1,48 @@
+.main-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  background: var(--primary);
+  height: 56px;
+  padding: 16px;
+}
+
+.user-data {
+  display: flex;
+  align-items: center;
+  column-gap: 24px;
+
+  span {
+    font-weight: bold;
+  }
+}
+
+.user-profile-edit,
+.logout-contianer {
+  display: flex;
+  align-items: center;
+  text-transform: capitalize;
+  cursor: pointer;
+  column-gap: 8px;
+  transition: opacity 0.15s ease-in-out;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.logout {
+  margin-right: 8px;
+}
+
+@media screen and (max-width: 768px) {
+  .user-name {
+    display: none;
+  }
+
+  .logout {
+    display: none;
+  }
+}
