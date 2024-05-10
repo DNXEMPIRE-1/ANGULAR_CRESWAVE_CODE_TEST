@@ -1,0 +1,5 @@
+<div class="checkbox-container" [formGroup]="fg">
+  <mat-checkbox [formControlName]="fcName" [id]="elId" color="primary" (change)="onChange($event)">
+    {{ labelText }}
+  </mat-checkbox>
+</div>
