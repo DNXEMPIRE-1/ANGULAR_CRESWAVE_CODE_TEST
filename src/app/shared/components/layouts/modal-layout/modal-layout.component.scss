@@ -1,0 +1,17 @@
+.modal-header {
+  font-size: 1.25rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  margin: 0;
+  padding: 0 1.5rem 0.25rem 1rem;
+  background: var(--primary-dark);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.modal-body {
+  margin-top: 1rem;
+}
+
+.modal-footer {
+  gap: 1.5rem;
+}
