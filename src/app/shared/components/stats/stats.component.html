@@ -1,0 +1,15 @@
+<article class="stats">
+  <div
+    class="stat"
+    *ngFor="let stat of stats; let i = index; trackBy: getItemKey"
+    [ngStyle]="{ 'border-right': i === stats.length - 1 ? 'none' : '' }"
+  >
+    <header class="title">{{ stat.title }}</header>
+    <div class="content">
+      <span>
+        {{ stat.content }}
+      </span>
+      <app-icon [icon]="stat.icon" [size]="48"></app-icon>
+    </div>
+  </div>
+</article>
