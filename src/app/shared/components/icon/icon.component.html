@@ -1,0 +1,19 @@
+<a *ngIf="url; else iconTemplate" [routerLink]="url" [queryParams]="queryParams">
+  <ng-container *ngTemplateOutlet="iconTemplate"></ng-container>
+</a>
+
+<ng-template #iconTemplate>
+  <i class="icon-container">
+    <mat-icon
+      [id]="elId"
+      aria-hidden="false"
+      [ariaLabel]="ariaLabelText"
+      [fontIcon]="icon"
+      [color]="color"
+      (click)="clicked.emit()"
+      [matTooltip]="title"
+      [ngClass]="{ 'action-icon': clickable, 'large-on-sm': forceLargeSizeOnSm }"
+      [ngStyle]="getStyles()"
+    ></mat-icon>
+  </i>
+</ng-template>
