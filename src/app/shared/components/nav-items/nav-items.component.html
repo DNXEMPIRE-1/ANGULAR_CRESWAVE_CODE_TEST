@@ -1,0 +1,24 @@
+<nav id="cNavItemsNav">
+  <ul id="cNavItemsList" class="nav-items" [ngClass]="{ side: onSideNav }">
+    <li class="nav-item" *ngFor="let item of items">
+      <app-button
+        model="link"
+        [elId]="'cNavItemsButton' + item.id"
+        [hiddenLabel]="hiddenLabel"
+        [iconOnly]="iconOnly"
+        [url]="'/' + item.link"
+        [styles]="{
+          height: !onSideNav ? '56px' : '',
+          justifyContent: onSideNav ? 'flex-start' : '',
+          paddingTop: onSideNav ? '16px' : '',
+          paddingBottom: onSideNav ? '16px' : '',
+        }"
+      >
+        <app-icon [icon]="item.icon" labelIcon [styles]="{ color: '#fff' }"></app-icon>
+        <span *ngIf="item.label" class="label">
+          {{ item.label }}
+        </span>
+      </app-button>
+    </li>
+  </ul>
+</nav>
