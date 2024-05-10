@@ -1,0 +1,25 @@
+<header class="main-header mat-elevation-z6">
+  <app-breadcrumb></app-breadcrumb>
+
+  <section class="user-data" *ngIf="setLoggedUser$ | async as loggedUser">
+    <div class="user-profile-edit" matTooltip="Edit Your Profile" [routerLink]="paths.myProfile">
+      <span class="user-name">{{ loggedUser.name }}</span>
+      <app-icon
+        [icon]="Icons.AccountCircle"
+        [color]="undefined"
+        [forceLargeSizeOnSm]="true"
+      ></app-icon>
+    </div>
+    <div class="user-profile-edit" (click)="logout()">
+      <span class="logout">Logout</span>
+      <app-icon
+        appSetId="cMainHeaderLogout"
+        [icon]="Icons.Logout"
+        [clickable]="true"
+        [color]="undefined"
+        matTooltip="Logout"
+        [forceLargeSizeOnSm]="true"
+      ></app-icon>
+    </div>
+  </section>
+</header>
