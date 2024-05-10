@@ -1,0 +1,13 @@
+app-card-layout {
+  display: flex;
+  justify-content: center;
+}
+
+.card-title {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.card-content {
+  opacity: 0.6;
+}
