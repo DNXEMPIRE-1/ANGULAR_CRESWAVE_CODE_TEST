@@ -1,0 +1,94 @@
+<div class="scrollable-table">
+  <table class="data-table" [appSetId]="elId">
+    <thead class="table-header" id="cTableHeader">
+      <tr>
+        <th
+          *ngFor="let itemConfig of itemConfigsToRender$ | async"
+          class="table-item column-sort"
+          [ngClass]="{ 'column-sort': !itemConfig.disabledOrderBy }"
+          [style]="itemConfig.styles"
+          (click)="itemConfig.disabledOrderBy ? null : onOrderBy(itemConfig.key)"
+        >
+          {{ itemConfig.header }}
+          <app-icon
+            *ngIf="!itemConfig.disabledOrderBy"
+            [ngClass]="{ 'active-sort': orderBy?.key === itemConfig.key }"
+            [icon]="orderBy?.direction === 'asc' ? Icons.ArrowUpward : Icons.ArrowDownward"
+            [size]="20"
+          >
+          </app-icon>
+        </th>
+        <th *ngIf="canShowActions()"></th>
+      </tr>
+    </thead>
+    <tbody id="cTableBody" *ngIf="hasItems">
+      <tr
+        *ngFor="let item of orderedItems; let itemIndex = index; trackBy: getItemId"
+        class="table-row"
+      >
+        <td
+          *ngFor="let itemConfig of itemConfigsToRender$ | async"
+          class="table-item"
+          [style]="itemConfig.styles"
+        >
+          {{
+            getPropValue(item, itemConfig.key, itemConfig.defaultsTo)
+              | dynamic : itemConfig.pipe : itemConfig.pipeArgs
+          }}
+        </td>
+        <td *ngIf="canShowActions()" class="text-right actions">
+          <ng-template [ngIf]="isSmallScreen$ | async" [ngIfElse]="desktopActions">
+            <app-icon-button
+              [icon]="Icons.Menu"
+              [iconSize]="22"
+              matTooltip="Actions menu"
+              [matMenuTriggerFor]="menu"
+            ></app-icon-button>
+            <mat-menu #menu="matMenu" yPosition="below">
+              <div
+                mat-menu-item
+                *ngFor="let icon of icons"
+                (click)="icon.onClick?.(item.id!)"
+                [routerLink]="icon.urlType != null ? detailsUrl : undefined"
+                [queryParams]="buildQueryParams(item.id, icon.urlType)"
+              >
+                <app-icon
+                  [elId]="'cTable' + icon.id + itemIndex"
+                  [icon]="icon.icon"
+                  [color]="icon.color"
+                  [clickable]="true"
+                  [url]="icon.urlType != null ? detailsUrl : undefined"
+                  [urlType]="icon.urlType"
+                  [itemId]="item.id"
+                  (clicked)="icon.onClick?.(item.id!)"
+                ></app-icon>
+                <span>{{ icon.title }}</span>
+              </div>
+            </mat-menu>
+          </ng-template>
+          <ng-template #desktopActions>
+            <app-icon
+              *ngFor="let icon of icons"
+              [elId]="'cTable' + icon.id + itemIndex"
+              [icon]="icon.icon"
+              [color]="icon.color"
+              [clickable]="true"
+              [url]="icon.urlType != null ? detailsUrl : undefined"
+              [urlType]="icon.urlType"
+              [itemId]="item.id"
+              (clicked)="icon.onClick?.(item.id!)"
+              [matTooltip]="icon.title ?? ''"
+            ></app-icon>
+          </ng-template>
+        </td>
+      </tr>
+    </tbody>
+    <div class="table-loader" *ngIf="isLoading$ | async">
+      <app-loading [size]="48"> </app-loading>
+    </div>
+  </table>
+</div>
+<div *ngIf="!hasItems && (isLoading$ | async) === false" class="empty-table">
+  <span class="empty-title">No items found!</span>
+  <span class="empty-text">Search for other filters or create an item to see them here.</span>
+</div>
