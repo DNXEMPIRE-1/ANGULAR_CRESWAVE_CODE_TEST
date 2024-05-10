@@ -1,0 +1,65 @@
+@use 'src/_mixins.scss' as mxs;
+
+$sidebar-bg: var(--bg-color);
+
+.sidebar-container {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+}
+
+.sidebar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $sidebar-bg;
+  border-right-color: $sidebar-bg;
+  overflow-x: hidden;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+
+  width: 42px;
+  padding: 0;
+  &:hover {
+    width: 240px;
+    padding: 0 16px;
+  }
+}
+
+.main-content {
+  background: $sidebar-bg;
+  overflow-x: hidden;
+
+  @media screen and (max-width: 768px) {
+    padding-bottom: 56px;
+  }
+}
+
+.logo {
+  @include mxs.dash(bottom, 4px, 2px);
+  @include mxs.scale-out-if-hidden();
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  height: 56px;
+  font-size: 1rem;
+  transition: scale 0.15s ease-in-out;
+
+  &:active {
+    scale: 0.95;
+  }
+}
+
+.scrollbar-hider {
+  background: $sidebar-bg;
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200px;
+}
