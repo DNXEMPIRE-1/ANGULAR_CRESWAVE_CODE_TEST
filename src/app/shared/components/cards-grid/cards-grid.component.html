@@ -1,0 +1,3 @@
+<section class="cards-grid">
+  <app-card *ngFor="let c of cards" [id]="c.id" [routerLink]="'/' + c.url" [card]="c"></app-card>
+</section>
