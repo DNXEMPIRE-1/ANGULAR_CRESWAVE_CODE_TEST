@@ -1,0 +1,135 @@
+$border-color: var(--secondary-dark);
+$table-bg: var(--bg-color);
+$table-border: 2px solid rgba(0, 0, 0, 0.2);
+$bottom-margin: 1rem;
+
+.data-table {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background: $table-bg;
+  border-spacing: 0;
+  border: $table-border;
+}
+
+.table-header {
+  position: relative;
+  color: #fff;
+}
+
+.table-row {
+  position: relative;
+  transition: background 0.15s ease-in-out;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  &:last-child td {
+    border-bottom: none;
+  }
+}
+
+.table-loader {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 20;
+}
+
+app-loading {
+  position: absolute;
+  z-index: 1000;
+}
+
+th {
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+th,
+td {
+  text-align: start;
+  border-right: none !important;
+}
+
+th {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid $border-color;
+  &:last-child {
+    border-right: none !important;
+  }
+}
+
+td {
+  border-top: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
+}
+
+.table-item {
+  padding: 1rem 1.5rem;
+}
+
+.column-sort {
+  cursor: pointer;
+  position: relative;
+
+  app-icon {
+    opacity: 0;
+    position: absolute;
+    transition: all 0.2s ease-in-out;
+    &.active-sort {
+      opacity: 1;
+    }
+  }
+
+  &:hover {
+    app-icon {
+      opacity: 1;
+    }
+  }
+}
+
+.actions {
+  text-align: right;
+
+  app-icon {
+    font-size: 1.25rem;
+    margin-right: 1.5rem;
+  }
+}
+
+.scrollable-table {
+  overflow: auto;
+  margin-bottom: $bottom-margin;
+}
+
+.empty-table {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  row-gap: 12px;
+  background: $table-bg;
+  padding: 2rem;
+  margin-top: -$bottom-margin;
+  margin-bottom: $bottom-margin;
+  border: $table-border;
+}
+
+.empty-title {
+  font-size: 2.5rem;
+  color: var(--primary);
+}
+
+.empty-text {
+  opacity: 0.6;
+}
