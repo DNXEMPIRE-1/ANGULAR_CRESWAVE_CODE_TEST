@@ -2,7 +2,7 @@ version: "3.8"
 services:
   spa:
     container_name: ${APP_NAME}
-    image: matheusb432/${APP_NAME}
+    image: DNXEMPIRE-1/${APP_NAME}
     build:
       context: .
       dockerfile: Dockerfile
