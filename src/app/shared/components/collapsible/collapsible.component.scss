@@ -1,0 +1,43 @@
+.trigger {
+  all: unset;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.icon {
+  right: 0;
+  top: 0;
+
+  color: var(--primary);
+  transition: all 0.15s ease-in-out;
+}
+
+.expand {
+  transform: rotate(90deg);
+}
+
+.show-less {
+  transform: rotate(-90deg);
+}
+
+.content {
+  transform-origin: top;
+  transform: scaleY(1);
+  transform-style: flat;
+  max-height: 800px;
+  transition: all 0.15s ease;
+
+  &.hide-content {
+    transform: scaleY(0);
+    max-height: 0;
+  }
+}
