@@ -1,0 +1,34 @@
+<mat-form-field class="input-container" [appearance]="appearance" [formGroup]="fg">
+  <mat-label>
+    {{ labelText }}
+  </mat-label>
+  <input
+    matInput
+    [type]="type"
+    [formControlName]="fcName"
+    [placeholder]="placeholder"
+    [id]="id"
+    onmousewheel="blur()"
+    (keydown)="keydownPressed.emit($event)"
+  />
+  <app-icon
+    matSuffix
+    *ngIf="labelIcon"
+    [icon]="labelIcon.icon"
+    [color]="labelIcon.color"
+    [size]="labelIcon.size ?? 24"
+    [clickable]="true"
+    (clicked)="labelIcon.onClick?.()"
+  ></app-icon>
+  <span *ngIf="isLoading" class="input-loading-container">
+    <app-loading [size]="24"> </app-loading>
+  </span>
+  <mat-error *ngIf="invalid && !disabled && !helpers">
+    {{ getErrText() }}
+  </mat-error>
+</mat-form-field>
+<small class="helper" *ngIf="!!helpers && !disabled">
+  <ul>
+    <li *ngFor="let helper of helpers" [ngClass]="{ 'invalid-helper': invalid }">- {{ helper }}</li>
+  </ul>
+</small>
