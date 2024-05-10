@@ -1,0 +1,30 @@
+$card-bg: var(--bg-color);
+$border-color: var(--secondary-dark);
+
+.card {
+  width: 280px;
+  height: 268px;
+  border: 1px solid $border-color;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: scale 0.2s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    scale: 1.1;
+  }
+
+  .card-body {
+    width: 100%;
+    height: 116px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: $card-bg;
+    overflow-y: auto;
+  }
+}
