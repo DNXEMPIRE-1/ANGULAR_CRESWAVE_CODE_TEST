@@ -1,0 +1,30 @@
+<mat-form-field class="input-container" [formGroup]="fg">
+  <mat-label>{{ labelText }}</mat-label>
+  <mat-date-range-input
+    [formGroupName]="fgName"
+    [rangePicker]="picker"
+    [min]="minDate"
+    [max]="maxDate"
+  >
+    <input
+      class="date-range-input"
+      matStartDate
+      (click)="picker.open()"
+      formControlName="start"
+      placeholder="Start date"
+    />
+    <input
+      class="date-range-input"
+      matEndDate
+      (click)="picker.open()"
+      formControlName="end"
+      placeholder="End date"
+    />
+  </mat-date-range-input>
+  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-date-range-picker #picker></mat-date-range-picker>
+  <mat-error *ngIf="invalid && !disabled">{{ getErrText() }}</mat-error>
+  <span *ngIf="isLoading" class="input-loading-container">
+    <app-loading [size]="24"></app-loading>
+  </span>
+</mat-form-field>
