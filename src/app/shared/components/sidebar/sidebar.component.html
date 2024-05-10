@@ -1,0 +1,27 @@
+<mat-sidenav-container class="sidebar-container">
+  <mat-sidenav
+    #sidenav
+    mode="side"
+    [opened]="(isMobile$ | async) === false"
+    class="sidebar"
+    [fixedInViewport]="true"
+    (mouseenter)="hovering = true"
+    (mouseleave)="hovering = false"
+  >
+    <h1 class="logo" title="Task Manager App" [routerLink]="paths.home">
+      <span *ngIf="!hovering; else fullLogo">TMA</span>
+      <ng-template #fullLogo>
+        <span>Task Manager App </span>
+      </ng-template>
+    </h1>
+
+    <app-nav-items [items]="navItems" [hiddenLabel]="!hovering" [onSideNav]="true"></app-nav-items>
+    <div class="scrollbar-hider"></div>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="main-content">
+    <app-main-header></app-main-header>
+    <ng-content></ng-content>
+    <app-footer-nav [showNav]="(isMobile$ | async) === true"></app-footer-nav>
+  </mat-sidenav-content>
+</mat-sidenav-container>
