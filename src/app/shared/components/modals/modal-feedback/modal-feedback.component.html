@@ -1,0 +1,13 @@
+<app-modal-layout>
+  <ng-container titleContent>{{ data.title }}</ng-container>
+  <p>{{ data.message }}</p>
+  <ng-container actions>
+    <app-button
+      [mat-dialog-close]
+      elId="cModalFeedbackConfirm"
+      appFocusInitial
+      [focusChild]="true"
+      >{{ data.confirmText ?? 'OK' }}</app-button
+    >
+  </ng-container>
+</app-modal-layout>
