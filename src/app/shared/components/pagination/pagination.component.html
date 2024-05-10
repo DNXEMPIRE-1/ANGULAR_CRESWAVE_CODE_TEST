@@ -1,0 +1,12 @@
+<mat-paginator
+  [length]="total"
+  [pageSize]="itemsPerPage"
+  [pageSizeOptions]="pageSizeOptions"
+  [color]="color"
+  [showFirstLastButtons]="(isMobile$ | async) === false"
+  (page)="pageChanged.emit($event)"
+  aria-label="Select page"
+  class="pagination"
+  [pageIndex]="currentPage - 1"
+>
+</mat-paginator>
