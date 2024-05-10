@@ -1,0 +1,9 @@
+<button type="button" class="trigger" (click)="open = !open">
+  <ng-content select="[collapsibleTitle]"></ng-content>
+  <div class="icon" [ngClass]="{ expand: !open, 'show-less': open }">
+    <app-icon [icon]="Icons.ChevronRight" [size]="48"></app-icon>
+  </div>
+</button>
+<div class="content" [ngClass]="{ 'hide-content': !open }">
+  <ng-content></ng-content>
+</div>
