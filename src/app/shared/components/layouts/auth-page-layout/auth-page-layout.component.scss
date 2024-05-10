@@ -1,0 +1,40 @@
+$image-width: 638px;
+$content-min-width: 344px;
+$page: $image-width + $content-min-width;
+
+.auth-container {
+  display: flex;
+  height: 100vh;
+}
+
+.side-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+
+  app-image {
+    width: $image-width;
+  }
+}
+
+.page-content {
+  display: flex;
+  flex-direction: column;
+  min-width: $content-min-width;
+  background: var(--secondary-dark);
+  color: #fff;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+  overflow-y: auto;
+}
+
+@media screen and (max-width: $page) {
+  .page-content {
+    flex: 1;
+  }
+
+  .side-image {
+    display: none;
+  }
+}
