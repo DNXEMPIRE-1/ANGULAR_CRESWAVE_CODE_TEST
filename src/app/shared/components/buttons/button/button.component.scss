@@ -1,0 +1,35 @@
+@use 'src/_mixins.scss' as mxs;
+
+.button-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  gap: 8px;
+  transition: all 0.15s ease-in-out;
+
+  .label {
+    @include mxs.scale-out-if-hidden();
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.link-button {
+  width: 100%;
+}
+
+.active-link {
+  background: var(--primary);
+}
+
+.icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
