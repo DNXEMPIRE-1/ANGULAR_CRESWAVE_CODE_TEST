@@ -1,0 +1,15 @@
+.icon-container {
+  vertical-align: middle;
+}
+
+.action-icon {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .large-on-sm {
+    font-size: 28px !important;
+    width: 28px !important;
+    height: 28px !important;
+  }
+}
