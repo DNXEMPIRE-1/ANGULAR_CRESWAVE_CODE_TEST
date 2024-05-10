@@ -1,0 +1,31 @@
+<mat-form-field
+  *ngIf="options != null"
+  class="input-container"
+  [appearance]="appearance"
+  [formGroup]="fg"
+>
+  <mat-label *ngIf="labelText">{{ labelText }}</mat-label>
+  <mat-select
+    [placeholder]="placeholder"
+    [formControlName]="fcName"
+    [multiple]="multiple"
+    [compareWith]="compareWithFn"
+    [id]="id"
+  >
+    <mat-option
+      [id]="id + 'Option' + (option.id ?? option.value)"
+      *ngFor="let option of options"
+      [value]="option.value"
+    >
+      {{ option.label }}
+    </mat-option>
+  </mat-select>
+
+  <span *ngIf="isLoading" class="input-loading-container">
+    <app-loading [size]="24"> </app-loading>
+  </span>
+  <mat-error *ngIf="invalid && !!disabled">{{ getErrText() }}</mat-error>
+  <small class="helper" *ngIf="helpers && !invalid && !!disabled">
+    {{ helpers }}
+  </small>
+</mat-form-field>
