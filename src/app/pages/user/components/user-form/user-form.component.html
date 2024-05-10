@@ -1,0 +1,66 @@
+<form
+  app-form-layout
+  [id]="elIds.UserForm"
+  class="form-layout"
+  [formGroup]="form"
+  (ngSubmit)="openSaveModal()"
+  [canEdit]="canEdit"
+>
+  <div class="form-grid" [appScrollTo]="true">
+    <app-input
+      fcName="userName"
+      labelText="Username"
+      placeholder="Enter the users's username"
+    ></app-input>
+    <app-input fcName="name" labelText="Name" placeholder="Enter the users's name"></app-input>
+
+    <app-input fcName="email" labelText="Email" placeholder="Enter the users's email"></app-input>
+
+    <app-input
+      fcName="password"
+      [labelText]="isCreateForm ? 'Password' : 'Reset Password'"
+      [type]="passwordVisible ? 'text' : 'password'"
+      placeholder="Enter a password"
+      [labelIcon]="visibilityIcon"
+      [helpers]="passwordHelpers"
+    ></app-input>
+    <app-input
+      fcName="confirmPassword"
+      labelText="Confirm Password"
+      [type]="passwordVisible ? 'text' : 'password'"
+      placeholder="Confirm password"
+      [labelIcon]="visibilityIcon"
+    ></app-input>
+
+    <app-select
+      fcName="roleIds"
+      labelText="Roles"
+      [options]="roleOptions$ | async"
+      [elId]="elIds.UserFormRoles"
+      [multiple]="true"
+    ></app-select>
+    <div class="form-buttons">
+      <div *ngIf="showDelete()" class="left-buttons">
+        <app-button
+          model="raised"
+          [elId]="elIds.UserDelete"
+          (clicked)="openDeleteModal()"
+          color="warn"
+          >Delete</app-button
+        >
+      </div>
+
+      <app-button model="raised" elId="cUserFormCancel" (clicked)="onCancel()" color="accent"
+        >Cancel</app-button
+      >
+      <app-button
+        model="raised"
+        [elId]="elIds.UserSubmit"
+        *ngIf="canEdit"
+        [disabled]="form.invalid"
+        type="submit"
+        >{{ submitLabel }}</app-button
+      >
+    </div>
+  </div>
+</form>

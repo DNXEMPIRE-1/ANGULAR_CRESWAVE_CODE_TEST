@@ -1,0 +1,90 @@
+<div
+  class="slide"
+  [ngClass]="{
+  weekend: slide.isWeekend,
+  active: slide.selected,
+  holiday: slide.isHoliday,
+  special: slide.isSpecial,
+}"
+  [id]="'cTimesheetSlide' + slide.date"
+>
+  <header class="slide-header">
+    <div class="title" [matTooltip]="getTitleTooltip()" [ngClass]="{ today: slide.isToday }">
+      <span class="day">
+        {{ slide.day }}
+      </span>
+      <span class="day-of-week">
+        {{ slide.dayOfWeek }}
+      </span>
+    </div>
+    <div class="icons">
+      <app-icon-button
+        [icon]="Icons.OpenInBrowser"
+        [iconSize]="22"
+        [styles]="{
+          color: slide.selected ? '#fff' : ''
+        }"
+        (clicked)="onSlideClick(slide)"
+        matTooltip="Open timesheet"
+      ></app-icon-button>
+      <ng-template [ngIf]="isExistingTimesheet$ | async">
+        <app-icon-button
+          [icon]="Icons.Menu"
+          [iconSize]="22"
+          [styles]="{
+            color: slide.selected ? '#fff' : ''
+          }"
+          matTooltip="Actions menu"
+          [matMenuTriggerFor]="menu"
+        ></app-icon-button>
+        <mat-menu #menu="matMenu" yPosition="below">
+          <button mat-menu-item (click)="onSlideMenuClick(DetailsTypes.Edit)">Edit</button>
+          <button mat-menu-item (click)="onSlideMenuClick(DetailsTypes.View)">View</button>
+          <button mat-menu-item (click)="onSlideMenuClick(DetailsTypes.Duplicate)">
+            Duplicate
+          </button>
+        </mat-menu>
+      </ng-template>
+    </div>
+  </header>
+  <div class="slide-body">
+    <ng-template [ngIf]="metrics$ | async" let-metrics [ngIfElse]="noMetrics">
+      <ng-template #slideBodyTemplate let-profile>
+        <app-timesheet-slide-span
+          [titleText]="metrics.totalTasks + ' total tasks'"
+          [ngClass]="getTasksClasses(metrics, profile)"
+          [profileText]="profile?.tasksTarget"
+          [icon]="Icons.Assignment"
+        >
+          {{ metrics.totalTasks }}
+        </app-timesheet-slide-span>
+        <app-timesheet-slide-span
+          [titleText]="'Time spent: ' + (metrics.workedHours | time)"
+          [ngClass]="getTotalHoursClasses(metrics, profile)"
+          [profileText]="profile?.timeTarget | time"
+          [icon]="Icons.Timelapse"
+        >
+          {{ metrics.workedHours | time }}
+        </app-timesheet-slide-span>
+        <app-timesheet-slide-span
+          [titleText]="metrics.averageRating + ' average rating'"
+          [icon]="Icons.Star"
+        >
+          {{ metrics.averageRating | number : '1.0-1' }}
+        </app-timesheet-slide-span>
+      </ng-template>
+      <ng-container *ngTemplateOutlet="slideBodyTemplate; context: { $implicit: profile$ | async }">
+      </ng-container>
+    </ng-template>
+    <ng-template #noMetrics>
+      <span class="no-metrics" (click)="onSlideClick(slide)">
+        <app-icon
+          [matTooltip]="!slide.selected ? 'Add timesheet' : ''"
+          [icon]="Icons.AddCircleOutline"
+          [size]="48"
+          [clickable]="true"
+        ></app-icon>
+      </span>
+    </ng-template>
+  </div>
+</div>

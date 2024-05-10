@@ -1,0 +1,9 @@
+<header app-form-layout [id]="'cMetrics'" [formGroup]="filterForm" class="search-bar">
+  <app-date-range-picker
+    fgName="range"
+    labelText="App Date Range"
+    [minDate]="twoMonthsAgo"
+    [maxDate]="twoMonthsFromNow"
+  ></app-date-range-picker>
+  <app-metrics-stats [avgMetrics]="avgMetrics$ | async"></app-metrics-stats>
+</header>

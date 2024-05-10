@@ -1,0 +1,78 @@
+<app-title
+  titleText="FAQs"
+  subtitle="Frequently asked questions & tips on how to best use the app"
+></app-title>
+<section class="faqs">
+  <div class="faqs-card">
+    <app-collapsible>
+      <h2 class="question" collapsibleTitle>How can I find my way around the app?</h2>
+      <article class="answer">
+        You can easily move around the app by tapping the menu bar. It’s on the left side for larger
+        screens and at the bottom for phones. Also, tapping the logo or the home icon takes you back
+        to the <app-link [to]="paths.home">Home Page</app-link>
+      </article>
+    </app-collapsible>
+    <app-collapsible>
+      <h2 class="question" collapsibleTitle>How do I add tasks I'll use a lot?</h2>
+      <article class="answer">
+        To save tasks you use often, just click the “Add Task” button at the top right of the
+        <app-link [to]="paths.presetTaskItems">Tasks Page</app-link>, and then set them up in a
+        profile.
+      </article>
+    </app-collapsible>
+    <app-collapsible>
+      <h2 class="question" collapsibleTitle>How to setup a profile?</h2>
+      <article class="answer">
+        To get started with a productivity profile, just hit the “Add Profile” button at the top
+        right of the <app-link [to]="paths.profiles">Profile Page</app-link>. Then, you can add
+        tasks to your profile by choosing them from the ‘Preset Tasks’ dropdown.
+      </article>
+    </app-collapsible>
+    <app-collapsible>
+      <h2 class="question" collapsibleTitle>What’s the way to make timesheets?</h2>
+      <article class="answer">
+        Creating timesheets is a breeze! Just tap the “+” sign on any day in the calendar or the
+        'Open' icon in the day's header on the
+        <app-link [to]="paths.timesheets">Timesheets Page</app-link>.
+      </article>
+    </app-collapsible>
+    <app-collapsible>
+      <h2 class="question" collapsibleTitle>Can I see how I did on a specific day?</h2>
+      <article class="answer">
+        Absolutely! After making a timesheet, go to the
+        <app-link [to]="paths.timesheets">Timesheets Page</app-link>. There you'll see how you did
+        for each day in an easy-to-read format in the calendar. they can be read like so:
+        <article class="metrics-spans">
+          <app-timesheet-slide-span [titleText]="'Hi!'" [icon]="Icons.Assignment">
+            10 (no target set)
+          </app-timesheet-slide-span>
+          <app-timesheet-slide-span
+            [titleText]="'Hi!'"
+            [ngClass]="{ success: true }"
+            [profileText]="'10 (hit target)'"
+            [icon]="Icons.Assignment"
+          >
+            15
+          </app-timesheet-slide-span>
+          <app-timesheet-slide-span
+            [titleText]="'Hi!'"
+            [ngClass]="{ fail: true }"
+            [profileText]="'10 (less than target)'"
+            [icon]="Icons.Assignment"
+          >
+            5
+          </app-timesheet-slide-span>
+        </article>
+      </article>
+    </app-collapsible>
+    <app-collapsible>
+      <h2 class="question" collapsibleTitle>Where can I check out all my progress?</h2>
+      <article class="answer">
+        You can see all your productivity numbers on the
+        <app-link [to]="paths.metrics">Metrics Page</app-link>, complete with total and average
+        data. It’s like your personal scoreboard! You can also change the default date range to see
+        your progress over a specific period of time.
+      </article>
+    </app-collapsible>
+  </div>
+</section>

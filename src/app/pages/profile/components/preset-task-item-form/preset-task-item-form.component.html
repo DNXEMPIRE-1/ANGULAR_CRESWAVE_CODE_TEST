@@ -1,0 +1,43 @@
+<form
+  app-form-layout
+  [id]="elIds.PresetTaskItemForm"
+  class="form-layout"
+  [formGroup]="form"
+  (ngSubmit)="openSaveModal()"
+  [canEdit]="canEdit"
+>
+  <div class="form-grid" [appScrollTo]="true">
+    <app-input fcName="title" labelText="Task" placeholder="Enter the task title"> </app-input>
+    <app-textarea fcName="comment" labelText="Comment" placeholder="Enter a comment">
+    </app-textarea>
+    <app-input fcName="time" labelText="Time" type="time" [helpers]="['hh:mm']"></app-input>
+
+    <div class="form-buttons">
+      <div *ngIf="showDelete()" class="left-buttons">
+        <app-button
+          model="raised"
+          [elId]="elIds.PresetTaskItemDelete"
+          (clicked)="openDeleteModal()"
+          color="warn"
+          >Delete</app-button
+        >
+      </div>
+
+      <app-button
+        model="raised"
+        elId="cPresetTaskItemFormCancel"
+        (clicked)="onCancel()"
+        color="accent"
+        >Cancel</app-button
+      >
+      <app-button
+        model="raised"
+        [elId]="elIds.PresetTaskItemSubmit"
+        *ngIf="canEdit"
+        [disabled]="form.invalid"
+        type="submit"
+        >{{ submitLabel }}</app-button
+      >
+    </div>
+  </div>
+</form>

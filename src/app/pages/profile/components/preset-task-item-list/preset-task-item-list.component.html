@@ -1,0 +1,24 @@
+<article id="cPresetTaskItemListContainer">
+  <header app-form-layout [id]="'cPresetTaskItemList'" [formGroup]="filterForm" class="search-bar">
+    <app-search
+      fcName="name"
+      labelText="Search"
+      placeholder="Filter by name"
+      elId="cPresetTaskItemListNameFilter"
+      (filter)="onFilter()"
+      (apply)="applyFilter()"
+    ></app-search>
+  </header>
+  <app-table
+    [items]="(listItems$ | async) ?? []"
+    [config]="config"
+    [elId]="elIds.PresetTaskItemTable"
+    (deleteItem)="openDeleteModal($event)"
+    (orderByChanged)="handleOrderBy()"
+  ></app-table>
+  <app-pagination
+    [totalItems]="total$ | async"
+    [currentPage]="(lastOptions$ | async)?.page ?? 1"
+    (pageChanged)="paginate($event)"
+  ></app-pagination>
+</article>

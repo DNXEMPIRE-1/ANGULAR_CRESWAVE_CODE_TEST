@@ -1,0 +1,25 @@
+<form
+  app-form-layout
+  [id]="elIds.MyProfileForm"
+  class="form-layout"
+  [formGroup]="form"
+  (ngSubmit)="openSaveModal()"
+>
+  <div class="form-grid" [appScrollTo]="true">
+    <app-input fcName="userName" labelText="Username" placeholder="Your username"></app-input>
+    <app-input fcName="name" labelText="Name" placeholder="Your name"></app-input>
+
+    <div class="form-buttons">
+      <app-button model="raised" elId="cMyProfileFormCancel" (clicked)="onCancel()" color="accent"
+        >Cancel</app-button
+      >
+      <app-button
+        model="raised"
+        [elId]="elIds.MyProfileSubmit"
+        [disabled]="form.invalid"
+        type="submit"
+        >Update</app-button
+      >
+    </div>
+  </div>
+</form>

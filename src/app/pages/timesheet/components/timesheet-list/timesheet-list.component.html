@@ -1,0 +1,14 @@
+<article id="cTimesheetListContainer">
+  <app-table
+    [items]="(listItems$ | async) ?? []"
+    [config]="config"
+    [elId]="elIds.TimesheetTable"
+    (deleteItem)="openDeleteModal($event)"
+    (orderByChanged)="handleOrderBy()"
+  ></app-table>
+  <app-pagination
+    [totalItems]="total$ | async"
+    [currentPage]="(lastOptions$ | async)?.page ?? 1"
+    (pageChanged)="paginate($event)"
+  ></app-pagination>
+</article>

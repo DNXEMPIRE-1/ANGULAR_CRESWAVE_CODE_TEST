@@ -1,0 +1,82 @@
+@use 'src/_mixins.scss' as mxs;
+@use '../_timesheet-variables.scss' as timesheetVars;
+
+$card-bg: var(--bg-color);
+$border-color: var(--secondary-dark);
+
+.carousel {
+  position: relative;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  margin: 1.5rem 0;
+}
+
+.carousel-slides {
+  position: relative;
+  padding: 1rem 0;
+  background: timesheetVars.$carousel-bg;
+}
+
+.carousel-header {
+  border-bottom: 4px solid timesheetVars.$carousel-primary;
+  padding-top: 4px;
+  background: timesheetVars.$carousel-header-bg;
+}
+
+.carousel-actions {
+  text-align: center;
+  border-top: 1px solid $border-color;
+}
+
+::ng-deep .owl-nav {
+  display: none;
+}
+
+::ng-deep .owl-stage {
+  margin-bottom: 0.5rem;
+}
+
+.slide-nav {
+  position: absolute;
+  bottom: 0;
+  width: timesheetVars.$slide-nav-width;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 500;
+  cursor: pointer;
+  opacity: 1;
+  transition: all 0.15s ease-in-out;
+
+  app-icon {
+    opacity: 0;
+    transition: all 0.15s ease-in-out;
+  }
+
+  &:hover {
+    opacity: 1;
+
+    app-icon {
+      opacity: 1;
+    }
+  }
+
+  &.inactive {
+    opacity: 0;
+    pointer-events: none;
+    z-index: -1;
+  }
+}
+
+.slide-nav-prev {
+  @extend .slide-nav;
+  @include mxs.fading-bg(right);
+  left: 0;
+}
+
+.slide-nav-next {
+  @extend .slide-nav;
+  @include mxs.fading-bg(left);
+  right: 0;
+}

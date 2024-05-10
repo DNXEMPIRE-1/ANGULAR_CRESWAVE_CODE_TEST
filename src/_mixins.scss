@@ -1,0 +1,79 @@
+@mixin dash($position, $padding: 32px, $width: 1px, $color: #43484b) {
+  border-#{$position}: $width solid $color;
+  padding-#{$position}: $padding;
+}
+
+@mixin set-background($color) {
+  background-color: $color;
+  color: set-text-color($color);
+}
+
+@mixin add-pulse($duration: 3s) {
+  animation: pulse $duration infinite;
+}
+
+@mixin fading-bg($position) {
+  background: linear-gradient(to $position, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+}
+
+@mixin scale-out-if-hidden($duration: 0.3s) {
+  transition: all $duration ease-in-out;
+  &.hidden {
+    position: absolute;
+    transform: scale(0);
+    visibility: hidden;
+    animation: delay-position calc($duration + 0.5s) ease-in-out;
+  }
+}
+
+@mixin move-out-if-hidden($duration: 0.15s) {
+  transition: all $duration ease-in-out;
+  opacity: 1;
+  &.hidden {
+    position: absolute;
+    transform: translateX(-150%);
+    opacity: 0;
+    visibility: hidden;
+    animation: delay-position calc($duration + 0.5s) ease-in-out;
+  }
+}
+
+@mixin sticky-container($paddingX) {
+  position: sticky;
+  z-index: 10;
+  width: calc(100% + $paddingX * 2);
+  margin-left: -$paddingX;
+  padding-right: $paddingX;
+  padding-left: $paddingX;
+}
+
+@keyframes pulse {
+  0% {
+    background: #fff;
+  }
+
+  50% {
+    background: var(--primary-lighter);
+  }
+
+  100% {
+    background: #fff;
+  }
+}
+
+@function set-text-color($color) {
+  @if (lightness($color) > 70) {
+    @return #333;
+  } @else {
+    @return #fff;
+  }
+}
+
+@keyframes delay-position {
+  0% {
+    position: initial;
+  }
+  100% {
+    position: absolute;
+  }
+}

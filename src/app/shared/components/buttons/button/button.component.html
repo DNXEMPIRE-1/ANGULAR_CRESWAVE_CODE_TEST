@@ -1,0 +1,110 @@
+<ng-container [ngSwitch]="model">
+  <button
+    *ngSwitchCase="'raised'"
+    mat-raised-button
+    [id]="elId"
+    [color]="color"
+    [type]="type"
+    [disabled]="isDisabled"
+    [ngStyle]="styles"
+    (click)="emitClick()"
+  >
+    <ng-container *ngTemplateOutlet="labelTemplate"></ng-container>
+  </button>
+  <button
+    *ngSwitchCase="'stroked'"
+    mat-stroked-button
+    [id]="elId"
+    [color]="color"
+    [type]="type"
+    [ngStyle]="styles"
+    [disabled]="isDisabled"
+    (click)="emitClick()"
+  >
+    <ng-container *ngTemplateOutlet="labelTemplate"></ng-container>
+  </button>
+  <button
+    *ngSwitchCase="'flat'"
+    mat-flat-button
+    [id]="elId"
+    [color]="color"
+    [type]="type"
+    [ngStyle]="styles"
+    [disabled]="isDisabled"
+    (click)="emitClick()"
+  >
+    <ng-container *ngTemplateOutlet="labelTemplate"></ng-container>
+  </button>
+  <button
+    *ngSwitchCase="'icon'"
+    mat-icon-button
+    class="icon-btn"
+    [id]="elId"
+    [color]="color"
+    [type]="type"
+    [ngStyle]="styles"
+    [disabled]="isDisabled"
+    (click)="emitClick()"
+  >
+    <ng-container *ngTemplateOutlet="labelTemplate"></ng-container>
+  </button>
+  <button
+    *ngSwitchCase="'fab'"
+    mat-fab
+    [color]="color"
+    [type]="type"
+    [ngStyle]="styles"
+    [disabled]="isDisabled"
+    (click)="emitClick()"
+  >
+    <ng-container *ngTemplateOutlet="labelTemplate"></ng-container>
+  </button>
+  <button
+    *ngSwitchCase="'mini-fab'"
+    mat-mini-fab
+    [id]="elId"
+    [color]="color"
+    [type]="type"
+    [ngStyle]="styles"
+    [disabled]="isDisabled"
+    (click)="emitClick()"
+  >
+    <ng-container *ngTemplateOutlet="labelTemplate"></ng-container>
+  </button>
+  <a
+    *ngSwitchCase="'link'"
+    mat-button
+    [id]="elId"
+    [color]="color"
+    [routerLink]="url"
+    [ngStyle]="getLinkStyles()"
+    class="link-button"
+    routerLinkActive="active-link"
+    [disabled]="isDisabled"
+    ><ng-container *ngTemplateOutlet="labelTemplate"></ng-container
+  ></a>
+  <button
+    *ngSwitchDefault
+    mat-button
+    [id]="elId"
+    [color]="color"
+    [type]="type"
+    [ngStyle]="styles"
+    [disabled]="isDisabled"
+    (click)="emitClick()"
+  >
+    <ng-container *ngTemplateOutlet="labelTemplate"></ng-container>
+  </button>
+</ng-container>
+
+<ng-template #labelTemplate>
+  <div class="button-content">
+    <ng-content select="[labelIcon]"></ng-content>
+    <span *ngIf="!iconOnly" class="label" [ngClass]="{ hidden: hiddenLabel }">
+      <ng-content></ng-content>
+    </span>
+    <ng-container *ngIf="isLoading">
+      <app-loading [size]="20"></app-loading>
+    </ng-container>
+  </div>
+</ng-template>

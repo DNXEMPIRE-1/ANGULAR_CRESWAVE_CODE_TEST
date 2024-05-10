@@ -1,0 +1,38 @@
+{
+  "semi": true,
+  "trailingComma": "es5",
+  "tabWidth": 2,
+  "useTabs": false,
+  "singleQuote": true,
+  "printWidth": 100,
+  "bracketSameLine": false,
+  "bracketSpacing": true,
+  "arrowParens": "always",
+  "htmlWhitespaceSensitivity": "css",
+  "overrides": [
+    {
+      "files": "*.md",
+      "options": {
+        "parser": "markdown"
+      }
+    },
+    {
+      "files": [".eslintrc", ".imgbotconfig", ".prettierrc", ".stylelintrc", "*.json"],
+      "options": {
+        "parser": "json"
+      }
+    },
+    {
+      "files": ["*.yml", "*.neon.dist"],
+      "options": {
+        "parser": "yaml"
+      }
+    },
+    {
+      "files": ["*.xml", "*.xml.dist"],
+      "options": {
+        "parser": "xml"
+      }
+    }
+  ]
+}

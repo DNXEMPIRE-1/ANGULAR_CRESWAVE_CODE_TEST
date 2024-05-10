@@ -1,0 +1,126 @@
+<form
+  app-form-layout
+  [id]="elIds.TimesheetForm"
+  class="form-layout"
+  [formGroup]="form"
+  (ngSubmit)="openSaveModal()"
+  [canEdit]="canEdit"
+>
+  <div class="form-grid">
+    <ng-container
+      *ngIf="{
+        dateRange: dateRangeOrDefault$ | async,
+        dateFilterFn: dateFilterFn$ | async
+      } as values"
+    >
+      <app-datepicker
+        fcName="date"
+        labelText="Date"
+        [dateFilterFn]="values.dateFilterFn"
+        [minDate]="values.dateRange?.start"
+        [maxDate]="values.dateRange?.end"
+        [canEdit]="canEditDate"
+        [appScrollTo]="true"
+      ></app-datepicker>
+    </ng-container>
+    <ul
+      app-form-array-layout
+      titleText="Tasks"
+      formArrayName="tasks"
+      [showButtons]="canEdit"
+      buttonId="Task"
+      (added)="addTask()"
+    >
+      <li
+        app-form-layout
+        [id]="'cTimesheetFormTask' + i"
+        [formGroup]="taskForm"
+        class="form-item"
+        [canEdit]="canEdit"
+        *ngFor="let taskForm of taskForms.controls; let i = index"
+      >
+        <span class="preset-task" [matTooltip]="'Preset Task'" *ngIf="isPresetTask(taskForm)">
+          {{ getPresetTaskTitle(taskForm) }}
+        </span>
+        <ng-container *ngIf="!isPresetTask(taskForm)">
+          <app-input fcName="title" labelText="Task" placeholder="Enter the task title">
+          </app-input>
+        </ng-container>
+        <app-textarea fcName="comment" labelText="Comment" placeholder="Enter a Comment">
+        </app-textarea>
+        <app-input fcName="time" labelText="Time" type="time" [helpers]="['hh:mm']"></app-input>
+
+        <app-input
+          fcName="rating"
+          labelText="Rating"
+          type="number"
+          placeholder="Rate the task"
+          [helpers]="['0-5']"
+        ></app-input>
+
+        <app-button
+          model="raised"
+          [elId]="'TimesheetFormRemoveTask' + i"
+          (clicked)="removeTask(i)"
+          *ngIf="canEdit"
+          color="warn"
+          >Remove Task</app-button
+        >
+      </li>
+    </ul>
+    <ul
+      app-form-array-layout
+      titleText="Notes"
+      formArrayName="notes"
+      [showButtons]="canEdit"
+      buttonId="Note"
+      (added)="addNote()"
+    >
+      <li
+        class="form-item"
+        app-form-layout
+        [id]="'cTimesheetFormNote' + i"
+        [formGroup]="noteForm"
+        [canEdit]="canEdit"
+        *ngFor="let noteForm of noteForms.controls; let i = index; trackBy: getFormItemId"
+      >
+        <app-textarea fcName="comment" labelText="Note" placeholder="Enter a note"> </app-textarea>
+        <app-button
+          model="raised"
+          [elId]="'TimesheetFormRemoveNote' + i"
+          (clicked)="removeNote(i)"
+          *ngIf="canEdit"
+          color="warn"
+          >Remove Note</app-button
+        >
+      </li>
+    </ul>
+
+    <app-checkbox fcName="finished" labelText="Finished" [canEdit]="canEdit"> </app-checkbox>
+    <footer app-fixed-buttons-layout>
+      <ng-container leftButtons>
+        <app-button
+          model="raised"
+          [elId]="elIds.TimesheetDelete"
+          (clicked)="openDeleteModal()"
+          color="warn"
+          >Delete</app-button
+        >
+      </ng-container>
+
+      <ng-container rightButtons>
+        <app-button model="raised" elId="cTimesheetFormCancel" (clicked)="onCancel()" color="accent"
+          >Cancel</app-button
+        >
+        <app-button
+          model="raised"
+          [elId]="elIds.TimesheetSubmit"
+          *ngIf="canEdit"
+          [disabled]="form.invalid"
+          type="submit"
+          >{{ submitLabel }}</app-button
+        >
+      </ng-container>
+    </footer>
+  </div>
+</form>

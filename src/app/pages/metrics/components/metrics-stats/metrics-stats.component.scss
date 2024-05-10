@@ -1,0 +1,34 @@
+@use 'src/_mixins.scss' as mxs;
+
+.stat-contents {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 32px;
+  margin-bottom: 32px;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.stat-section {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+}
+
+.stats {
+  border: 1px solid var(--secondary-dark);
+  border-radius: 16px;
+  border-bottom: 0;
+}
+
+.divider {
+  @include mxs.dash(bottom, 0px, 2px);
+  width: 100%;
+}
+
+.stat-title {
+  font-size: 2rem;
+  font-weight: 400;
+  opacity: 0.8;
+}

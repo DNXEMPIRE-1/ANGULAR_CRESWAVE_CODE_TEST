@@ -1,0 +1,40 @@
+<form
+  app-form-layout
+  [id]="elIds.SignupForm"
+  class="side-form-layout"
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+>
+  <div class="form-grid">
+    <app-input
+      fcName="userName"
+      labelText="User name"
+      placeholder="Enter your user name"
+    ></app-input>
+    <app-input fcName="name" labelText="Name" placeholder="Enter your name"></app-input>
+
+    <app-input fcName="email" labelText="Email" placeholder="Enter your email"></app-input>
+
+    <app-input
+      fcName="password"
+      labelText="Password"
+      [type]="passwordVisible ? 'text' : 'password'"
+      placeholder="Enter your password"
+      [labelIcon]="visibilityIcon"
+      [helpers]="passwordHelpers"
+    ></app-input>
+    <app-input
+      fcName="confirmPassword"
+      labelText="Confirm Password"
+      [type]="passwordVisible ? 'text' : 'password'"
+      placeholder="Confirm password"
+      [labelIcon]="visibilityIcon"
+    ></app-input>
+
+    <div class="form-buttons">
+      <app-button model="raised" [elId]="elIds.SignupSubmit" [disabled]="form.invalid" type="submit"
+        >Sign Up</app-button
+      >
+    </div>
+  </div>
+</form>

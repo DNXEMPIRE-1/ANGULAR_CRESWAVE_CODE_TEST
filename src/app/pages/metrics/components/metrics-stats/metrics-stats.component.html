@@ -1,0 +1,30 @@
+<article class="stat-contents" *ngIf="avgMetrics; else noMetrics">
+  <h2 class="stat-title" *ngIf="dateRange$ | async as range">
+    Metrics from {{ range.start | date : 'shortDate' }} to {{ range.end | date : 'shortDate' }}
+  </h2>
+  <div class="stat-section">
+    <h2 class="stat-title">Totals</h2>
+    <app-stats [stats]="stats"></app-stats>
+    <app-stats [stats]="tasksStats"></app-stats>
+  </div>
+  <div class="divider"></div>
+  <div class="stat-section">
+    <h2 class="stat-title">Averages</h2>
+    <app-stats [stats]="dayStats"></app-stats>
+    <app-stats [stats]="weekStats"></app-stats>
+  </div>
+  <div class="divider"></div>
+</article>
+<ng-template #noMetrics>
+  <h2 *ngIf="dateRange$ | async as range; else noRange">
+    No timesheets found between dates {{ range.start | date : 'longDate' }} and
+    {{ range.end | date : 'longDate' }}!
+  </h2>
+  <ng-template #noRange>
+    <h2>No timesheets found!</h2>
+  </ng-template>
+  <p>
+    Create a timesheet with any profile to see your their metrics here, or change the date range by
+    clicking on 'App Date Range' input
+  </p>
+</ng-template>

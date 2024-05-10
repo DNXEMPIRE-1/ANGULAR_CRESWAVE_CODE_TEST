@@ -1,0 +1,10 @@
+<div class="month-slide" [ngClass]="{ active: slide.selected }">
+  <span class="clickable" (click)="onSlideClick()">
+    <span class="month">
+      {{ slide.month }}
+    </span>
+    <span class="year">
+      {{ slide.year }}
+    </span>
+  </span>
+</div>

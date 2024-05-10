@@ -1,0 +1,23 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li
+      *ngFor="let crumb of crumbs$ | async; let last = last; let first = first"
+      class="breadcrumb-item"
+      [ngClass]="{ 'clickable-crumb': first || !last }"
+    >
+      <a [routerLink]="last && !first ? undefined : crumb.url">
+        <app-icon
+          *ngIf="crumb.icon"
+          [icon]="crumb.icon"
+          [styles]="{ color: '#fff' }"
+          [size]="20"
+          [forceLargeSizeOnSm]="true"
+          [matTooltip]="'Go to ' + crumb.label"
+        ></app-icon>
+        <span class="crumb-label">
+          {{ crumb.label }}
+        </span>
+      </a>
+    </li>
+  </ol>
+</nav>

@@ -1,0 +1,62 @@
+<form
+  app-form-layout
+  [id]="elIds.ProfileForm"
+  class="form-layout"
+  [formGroup]="form"
+  (ngSubmit)="openSaveModal()"
+  [canEdit]="canEdit"
+>
+  <div class="form-grid" [appScrollTo]="true">
+    <app-input fcName="name" labelText="Name" placeholder="Profile Name"></app-input>
+
+    <app-input
+      fcName="timeTarget"
+      labelText="Time Target"
+      type="time"
+      [helpers]="['hh:mm']"
+    ></app-input>
+
+    <app-input fcName="tasksTarget" labelText="Tasks Target" type="number"></app-input>
+
+    <app-input fcName="priority" labelText="Priority" type="number"></app-input>
+
+    <app-select
+      fcName="profileTypeId"
+      labelText="Type"
+      [options]="typeOptions$ | async"
+      [elId]="elIds.ProfileFormType"
+    ></app-select>
+
+    <app-select
+      fcName="taskIds"
+      labelText="Preset Tasks"
+      [options]="taskOptions$ | async"
+      [elId]="elIds.PresetTaskItemFormTasks"
+      [multiple]="true"
+    ></app-select>
+
+    <div class="form-buttons">
+      <div *ngIf="showDelete()" class="left-buttons">
+        <app-button
+          model="raised"
+          [elId]="elIds.ProfileDelete"
+          (clicked)="openDeleteModal()"
+          color="warn"
+          >Delete</app-button
+        >
+      </div>
+
+      <app-button model="raised" elId="cProfileFormCancel" (clicked)="onCancel()" color="accent"
+        >Cancel</app-button
+      >
+      <app-button
+        model="raised"
+        [elId]="elIds.ProfileSubmit"
+        *ngIf="canEdit"
+        [disabled]="form.invalid"
+        type="submit"
+        >{{ submitLabel }}</app-button
+      >
+    </div>
+  </div>
+</form>

@@ -1,0 +1,36 @@
+<header app-form-layout [id]="'cTimesheetList'" [formGroup]="filterForm" class="search-bar">
+  <div class="title">
+    <app-title titleText="Timesheets"></app-title>
+    <div class="slides-container">
+      <app-slide fcName="showList" labelText="List" (changed)="onShowListChanged($event)">
+      </app-slide>
+      <app-slide
+        fcName="showCalendar"
+        labelText="Calendar"
+        (changed)="onShowCalendarChanged($event)"
+      >
+      </app-slide>
+    </div>
+  </div>
+  <app-date-range-picker
+    fgName="range"
+    labelText="App Date Range"
+    [minDate]="twoMonthsAgo"
+    [maxDate]="twoMonthsFromNow"
+  ></app-date-range-picker>
+</header>
+<div
+  class="hideable"
+  *ngIf="enableCalendarAnimation || showCalendar.value"
+  [ngClass]="{ hidden: !showCalendar.value }"
+>
+  <app-timesheet-carousel (selectedDate)="onSelectDate($event)"></app-timesheet-carousel>
+</div>
+<div
+  class="hideable"
+  *ngIf="enableListAnimation || showList.value"
+  [ngClass]="{ hidden: !showList.value }"
+>
+  <app-timesheet-list></app-timesheet-list>
+</div>
+<router-outlet></router-outlet>
