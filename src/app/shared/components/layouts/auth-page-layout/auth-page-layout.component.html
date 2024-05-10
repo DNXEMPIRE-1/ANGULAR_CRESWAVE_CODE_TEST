@@ -1,0 +1,13 @@
+<div class="auth-container">
+  <div class="side-image">
+    <app-image [image]="authImage"></app-image>
+  </div>
+  <section class="page-content">
+    <ng-content #pageContent></ng-content>
+    <div class="form-buttons">
+      <app-button model="raised" elId="cAuthenticationSwitchPage" (clicked)="switchPage()">{{
+        switchPageLabel
+      }}</app-button>
+    </div>
+  </section>
+</div>
