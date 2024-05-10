@@ -1,0 +1,21 @@
+<mat-form-field class="input-container" [appearance]="appearance" [formGroup]="fg">
+  <mat-label>
+    {{ labelText }}
+  </mat-label>
+  <textarea
+    matInput
+    cdkTextareaAutosize
+    #autosize="cdkTextareaAutosize"
+    cdkAutosizeMinRows="1"
+    cdkAutosizeMaxRows="20"
+    [formControlName]="fcName"
+    [placeholder]="placeholder"
+    [id]="id"
+  ></textarea>
+  <span *ngIf="isLoading" class="input-loading-container">
+    <app-loading [size]="24"> </app-loading>
+  </span>
+  <mat-error *ngIf="invalid && !disabled">
+    {{ getErrText() }}
+  </mat-error>
+</mat-form-field>
