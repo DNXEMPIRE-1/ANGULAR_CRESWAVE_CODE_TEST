@@ -1,0 +1,12 @@
+<h2 class="forms-title">{{ titleText }}</h2>
+<ng-content></ng-content>
+
+<div class="form-buttons" *ngIf="showButtons">
+  <app-button
+    model="raised"
+    [elId]="'cFormArrayAdd' + buttonId"
+    (clicked)="added.emit()"
+    color="accent"
+    >Add</app-button
+  >
+</div>
