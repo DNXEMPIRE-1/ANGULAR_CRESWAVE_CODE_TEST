@@ -14,6 +14,32 @@ export const canActivateAuth = (service = inject(AuthService)): true | UrlTree =
   return router.parseUrl(paths.login);
 };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const canActivateAuthAdmin = (service = inject(AuthService)): true | UrlTree => {
   const toaster = inject(ToastService);
   const router = inject(Router);
